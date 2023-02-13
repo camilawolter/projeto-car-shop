@@ -29,6 +29,13 @@ class CarService {
     if (!car) throw new Error('Car not found');
     return this.createDomain(car);
   }
+
+  public async update(id: string, infos: ICar) {
+    const carUpdate = await this.model.findByIdAndUpdate({ _id: id }, infos);
+    const newCar = await this.model.findById({ _id: id });
+    if (newCar !== null) return this.createDomain(newCar);
+    if (!carUpdate) throw new Error('Car not found');
+  }
 }
 
 export default CarService;
