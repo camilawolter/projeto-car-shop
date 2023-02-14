@@ -14,4 +14,10 @@ routes.get(
   async (req, res, next) => new MotorcycleController(req, res, next).getById(),
 );
 
+routes.put(
+  '/:id', 
+  validateId,
+  async (req, res, next) => new MotorcycleController(req, res, next).update(),
+);
+
 export default routes;
