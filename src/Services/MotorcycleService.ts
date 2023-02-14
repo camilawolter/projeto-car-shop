@@ -28,10 +28,10 @@ class MotorcycleService {
 
   public async update(id: string, infos: IMotorcycle) {
     const motorcycleODM = new MotorcycleODM();
-    const carUpdate = await motorcycleODM.update(id, infos);
-    const newCar = await motorcycleODM.findById(id);
-    if (newCar !== null) return this.createDomain(newCar);
-    if (!carUpdate) throw new Error('Car not found');
+    const motoUpdate = await motorcycleODM.update(id, infos);
+    const newMoto = await motorcycleODM.findById(id);
+    if (newMoto !== null) return this.createDomain(newMoto);
+    if (!motoUpdate) throw new Error('Motorcycle not found');
   }
 }
 
