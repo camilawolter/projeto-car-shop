@@ -89,4 +89,29 @@ describe('Testes da camada Service', function () {
     const result = await new CarService().create(inputBody);
     expect(result).to.be.deep.equal(domainCar);
   });
+  it('Alterar um carro pelo id com id inexistente', async function () {
+    const inputBody: ICar = {
+      model: 'Marea',
+      year: 2002,
+      color: 'Green',
+      status: true,
+      buyValue: 25.999,
+      doorsQty: 4,
+      seatsQty: 5,
+    };
+    
+    Sinon.stub(Model, 'findOne').resolves(false);
+    Sinon.stub(Model, 'findByIdAndUpdate').resolves(false);
+
+    try {
+      const service = new CarService();
+      await service.update('6348513f34c397abcad040b2', inputBody);
+    } catch (err) {
+      expect((err as Error).message).to.equal('Car not found');
+    }
+  });
+
+  afterEach(function () {
+    Sinon.restore();
+  });
 });
